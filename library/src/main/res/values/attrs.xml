@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="FilterView">
+        <attr name="entries" format="reference"/>
+        <attr name="title" format="string"/>
+        <attr name="elementPadding" format="dimension"/>
+        <attr name="single" format="boolean"/>
+    </declare-styleable>
+</resources>

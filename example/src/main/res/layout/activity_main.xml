@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:FilterView="http://schemas.android.com/apk/res-auto"
+    tools:context="com.choc.filterview.MainActivity">
+
+    <com.choc.library.view.FilterView
+        android:id="@+id/filter_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        FilterView:title="测试"
+        FilterView:entries="@array/test"
+        FilterView:single="true"
+        android:background="@color/white"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="打印选中Item"
+        android:layout_below="@+id/filter_view"
+        android:layout_marginTop="10dp"/>
+</RelativeLayout>
