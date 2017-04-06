@@ -25,6 +25,11 @@ import java.util.List;
 public class FilterView extends FrameLayout {
 
     private static final int elementDefaultPadding = 5;
+    private static final int fixedMode = 0;
+    private static final int wrapMode = 1;
+    private static final int fixedModeDefaultWidth = 100;
+    private static final int fixedModeDefaultHeight = 30;
+
     private String[] entries;
     private int entriesID;
     private LinearLayout filterCon;
@@ -33,6 +38,9 @@ public class FilterView extends FrameLayout {
     private TextView titleTxt;
     private int elementPadding;
     private boolean isSingle;
+    private int mode;
+    private int eleWidth;
+    private int eleHeight;
 
     public FilterView(Context context) {
         this(context, null);
@@ -52,6 +60,11 @@ public class FilterView extends FrameLayout {
             elementPadding = a.getDimensionPixelOffset(R.styleable.FilterView_elementPadding,
                     UnitConvertUtil.Dp2Px(context, elementDefaultPadding));
             isSingle = a.getBoolean(R.styleable.FilterView_single, true);
+            mode = a.getInteger(R.styleable.FilterView_mode, fixedMode);
+            eleWidth = a.getDimensionPixelOffset(R.styleable.FilterView_eleWidth,
+                    UnitConvertUtil.Dp2Px(getContext(), fixedModeDefaultWidth));
+            eleHeight = a.getDimensionPixelOffset(R.styleable.FilterView_eleHeight,
+                    UnitConvertUtil.Dp2Px(getContext(), fixedModeDefaultHeight));
         }finally {
             a.recycle();
         }
@@ -79,7 +92,18 @@ public class FilterView extends FrameLayout {
             childElements[i] = (CheckBox) LayoutInflater.from(getContext()).inflate(R.layout.filter_element, null);
             childElements[i].setOnCheckedChangeListener(new CompoundButtonListener(i));
             childElements[i].setText(elementStr[i]);
-            childElements[i].setPadding(elementPadding*6, elementPadding, elementPadding*6, elementPadding);
+
+            if(mode == fixedMode) { //固定模式
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(eleWidth, eleHeight);
+                childElements[i].setLayoutParams(layoutParams);
+                childElements[i].setPadding(0, 0, 0, 0);
+            }else if(mode == wrapMode) { //wrap模式
+                //计算长宽比例
+                int ratio = 6 - elementStr[i].length()/2;
+                ratio = Math.max(ratio, 1);
+                childElements[i].setPadding(elementPadding*ratio, elementPadding, elementPadding*ratio, elementPadding);
+            }
+
             filterCon.addView(childElements[i]);
         }
     }

@@ -5,5 +5,11 @@
         <attr name="title" format="string"/>
         <attr name="elementPadding" format="dimension"/>
         <attr name="single" format="boolean"/>
+        <attr name="mode" format="enum">
+            <enum name="fixed" value="0"/>
+            <enum name="wrap" value="1"/>
+        </attr>
+        <attr name="eleWidth" format="dimension"/>
+        <attr name="eleHeight" format="dimension"/>
     </declare-styleable>
 </resources>
