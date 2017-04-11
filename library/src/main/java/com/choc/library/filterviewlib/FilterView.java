@@ -1,9 +1,8 @@
-package com.choc.library.view;
+package com.choc.library.filterviewlib;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
@@ -13,8 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.choc.library.R;
-import com.choc.library.util.FindView;
-import com.choc.library.util.UnitConvertUtil;
+import com.choc.library.filterviewutil.FindView;
+import com.choc.library.filterviewutil.UnitConvertUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +40,7 @@ public class FilterView extends FrameLayout {
     private int mode;
     private int eleWidth;
     private int eleHeight;
+    private boolean checkFirst;
 
     public FilterView(Context context) {
         this(context, null);
@@ -65,6 +65,7 @@ public class FilterView extends FrameLayout {
                     UnitConvertUtil.Dp2Px(getContext(), fixedModeDefaultWidth));
             eleHeight = a.getDimensionPixelOffset(R.styleable.FilterView_eleHeight,
                     UnitConvertUtil.Dp2Px(getContext(), fixedModeDefaultHeight));
+            checkFirst = a.getBoolean(R.styleable.FilterView_checkFirst, true);
         }finally {
             a.recycle();
         }
@@ -106,6 +107,10 @@ public class FilterView extends FrameLayout {
 
             filterCon.addView(childElements[i]);
         }
+
+        if(checkFirst && childElements.length > 0) {
+            setCheckedItem(0);
+        }
     }
 
     public int getCheckedItem() {
@@ -131,6 +136,20 @@ public class FilterView extends FrameLayout {
             }
         }
         return checkedItemOrders;
+    }
+
+    public void setCheckedItem(int position) {
+        if(position >= 0 && position < childElements.length) {
+            childElements[position].setChecked(true);
+        }
+    }
+
+    public void setCheckedItems(int[] positions) {
+        if(!isSingle) {
+            for (int pt:positions) {
+                setCheckedItem(pt);
+            }
+        }
     }
 
     class CompoundButtonListener implements CompoundButton.OnCheckedChangeListener {

@@ -11,5 +11,6 @@
         </attr>
         <attr name="eleWidth" format="dimension"/>
         <attr name="eleHeight" format="dimension"/>
+        <attr name="checkFirst" format="boolean"/>
     </declare-styleable>
 </resources>

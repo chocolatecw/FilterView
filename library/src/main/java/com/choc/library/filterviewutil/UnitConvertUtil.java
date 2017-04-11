@@ -1,4 +1,4 @@
-package com.choc.library.util;
+package com.choc.library.filterviewutil;
 
 import android.content.Context;
 import android.content.res.Resources;

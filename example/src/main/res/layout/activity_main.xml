@@ -6,7 +6,7 @@
     xmlns:FilterView="http://schemas.android.com/apk/res-auto"
     tools:context="com.choc.filterview.MainActivity">
 
-    <com.choc.library.view.FilterView
+    <com.choc.library.filterviewlib.FilterView
         android:id="@+id/filter_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

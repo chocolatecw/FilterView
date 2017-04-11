@@ -6,7 +6,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.choc.library.view.FilterView;
+import com.choc.library.filterviewlib.FilterView;
 
 public class MainActivity extends AppCompatActivity {
 
